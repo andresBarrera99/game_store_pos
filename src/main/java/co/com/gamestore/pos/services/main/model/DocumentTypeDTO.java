@@ -5,7 +5,6 @@ public class DocumentTypeDTO{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private Integer ID;
 	private String description;
 	private String initials;
