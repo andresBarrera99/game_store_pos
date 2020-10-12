@@ -1,7 +1,5 @@
 package co.com.gamestore.pos.services.clients.model;
 
-import java.util.Date;
-
 import co.com.gamestore.framework.response.BaseResponse;
 
 /**
@@ -23,7 +21,7 @@ public class ClientDTO extends BaseResponse {
 	private Integer docType;
 	private String docNumber;
 	private String address;
-	private Date birthDate;
+	private Integer age;
 	private Long phone;
 	private Long cellPhone;
 
@@ -52,7 +50,7 @@ public class ClientDTO extends BaseResponse {
 	 * @param cellphone
 	 */
 	public ClientDTO(Long clientID, String name, String lastName1, String lastName2, Integer docType, String docNumber,
-			String address, Date birthDate, Long phone, Long cellphone) {
+			String address, Integer age, Long phone, Long cellphone) {
 		super();
 		this.clientID = clientID;
 		this.name = name;
@@ -61,7 +59,7 @@ public class ClientDTO extends BaseResponse {
 		this.docType = docType;
 		this.docNumber = docNumber;
 		this.address = address;
-		this.birthDate = birthDate;
+		this.age = age;
 		this.phone = phone;
 		this.cellPhone = cellphone;
 	}
@@ -167,17 +165,17 @@ public class ClientDTO extends BaseResponse {
 	}
 
 	/**
-	 * @return the birthDate
+	 * @return the age
 	 */
-	public Date getBirthDate() {
-		return birthDate;
+	public Integer getAge() {
+		return age;
 	}
 
 	/**
-	 * @param birthDate the birthDate to set
+	 * @param age the age to set
 	 */
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 
 	/**
@@ -195,16 +193,16 @@ public class ClientDTO extends BaseResponse {
 	}
 
 	/**
-	 * @return the cellphone
+	 * @return the cellPhone
 	 */
-	public Long getCellphone() {
+	public Long getCellPhone() {
 		return cellPhone;
 	}
 
 	/**
-	 * @param cellphone the cellphone to set
+	 * @param cellphone the cellPhone to set
 	 */
-	public void setCellphone(Long cellphone) {
+	public void setCellPhone(Long cellphone) {
 		this.cellPhone = cellphone;
 	}
 
@@ -212,7 +210,7 @@ public class ClientDTO extends BaseResponse {
 	public String toString() {
 		return "ClientDTO [clientID=" + clientID + ", name=" + name + ", lastName1=" + lastName1 + ", lastName2="
 				+ lastName2 + ", docType=" + docType + ", docNumber=" + docNumber + ", address=" + address
-				+ ", birthDate=" + birthDate + ", phone=" + phone + ", cellPhone=" + cellPhone + "]";
+				+ ", birthDate=" + age + ", phone=" + phone + ", cellPhone=" + cellPhone + "]";
 	}
 	
 		

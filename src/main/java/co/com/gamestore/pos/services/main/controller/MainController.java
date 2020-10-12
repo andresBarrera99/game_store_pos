@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.com.gamestore.framework.controller.BaseController;
 import co.com.gamestore.framework.error.CustomErrorException;
+import co.com.gamestore.framework.response.BaseResponse;
 import co.com.gamestore.pos.services.main.business.MainBusiness;
 import co.com.gamestore.pos.services.main.model.UserDTO;
 import co.com.gamestore.pos.services.main.repository.MainRepository;
@@ -38,6 +39,13 @@ public class MainController extends BaseController<MainBusiness, MainRepository>
 		return new ResponseEntity<>(response,HttpStatus.OK);
 		
 	}
-
+	
+	
+	@PostMapping(path = "/getDocumenTypes")
+	public ResponseEntity<BaseResponse> getDocumenTypes() throws Exception{
+		BaseResponse response = getBusiness().getDocumenTypes();
+		return new ResponseEntity<>(response,HttpStatus.OK);
+		
+	}
 }
 

@@ -6,7 +6,7 @@ INSERT INTO
 		doc_type_id,
 		doc_number,
 		address,
-		birth_date,
+		age,
 		phone,
 		cellphone
 	)

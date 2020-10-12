@@ -5,10 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 
 import co.com.gamestore.framework.error.CustomErrorException;
 import co.com.gamestore.framework.repository.BaseRepository;
+import co.com.gamestore.framework.util.Utils;
 import co.com.gamestore.pos.services.clients.model.ClientDTO;
 
 
@@ -27,16 +29,16 @@ public class ClientRepository extends BaseRepository {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = c.prepareStatement(getInsert("INSERT_NEW_CLIENT.sql"));
+			pstmt = c.prepareStatement(getInsert("INSERT_NEW_CLIENT.sql"),Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, request.getName());
 			pstmt.setString(2, request.getLastName1());
 			pstmt.setString(3, request.getLastName2());
 			pstmt.setInt(4, request.getDocType());
 			pstmt.setString(5, request.getDocNumber());
 			pstmt.setString(6, request.getAddress());
-			pstmt.setString(7, getDateFormated(request.getBirthDate()));
-			pstmt.setLong(8, request.getPhone());
-			pstmt.setLong(9, request.getCellphone());
+			pstmt.setInt(7, request.getAge());
+			pstmt.setLong(8, Utils.isNull(request.getPhone()) ? 0L : request.getPhone());
+			pstmt.setLong(9, request.getCellPhone());
 			int rowCount = pstmt.executeUpdate();
 			if (rowCount > 0) {
 				rs = pstmt.getGeneratedKeys();
@@ -96,9 +98,13 @@ public class ClientRepository extends BaseRepository {
 				response.setLastName1(rs.getString("last_name1"));
 				response.setLastName2(rs.getString("last_name2"));
 				response.setAddress(rs.getString("address"));
-				response.setBirthDate(getDateFormatedFromString(rs.getString("birth_date")));
+				response.setAge(rs.getInt("age"));
+				response.setPhone(rs.getLong("phone"));
+				response.setCellPhone(rs.getLong("cellphone"));
+				response.setDocType(request.getDocType());
+				response.setDocNumber(request.getDocNumber());
 			}
-		} catch (IOException | SQLException | ParseException e) {
+		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 			throw e;
 		} finally {
@@ -117,10 +123,11 @@ public class ClientRepository extends BaseRepository {
 			pstmt.setString(2, request.getLastName1());
 			pstmt.setString(3, request.getLastName2());
 			pstmt.setString(4, request.getAddress());
-			pstmt.setLong(5, request.getPhone());
-			pstmt.setLong(6, request.getCellphone());
-			pstmt.setInt(7, request.getDocType());
-			pstmt.setString(8, request.getDocNumber());
+			pstmt.setInt(5, request.getAge());
+			pstmt.setLong(6, Utils.isNull(request.getPhone()) ? 0L : request.getPhone());
+			pstmt.setLong(7, request.getCellPhone());
+			pstmt.setInt(8, request.getDocType());
+			pstmt.setString(9, request.getDocNumber());
 			int rowCount = pstmt.executeUpdate();
 			if (rowCount < 1) {
 				throw new CustomErrorException("No se logró actualizar el cliente con exito, por favor intente de nuevo");

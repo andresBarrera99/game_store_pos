@@ -4,7 +4,7 @@ SELECT
 	customer_last_name1 last_name1, 
 	customer_last_name2 last_name2, 
 	address, 
-	birth_date, 
+	age, 
 	phone, 
 	cellphone 
 FROM
