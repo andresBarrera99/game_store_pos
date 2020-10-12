@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.gamestore.framework.controller.BaseController;
+import co.com.gamestore.framework.dto.BaseDTO;
 import co.com.gamestore.framework.error.CustomErrorException;
-import co.com.gamestore.framework.response.BaseResponse;
 import co.com.gamestore.pos.services.main.business.MainBusiness;
 import co.com.gamestore.pos.services.main.model.UserDTO;
 import co.com.gamestore.pos.services.main.repository.MainRepository;
@@ -40,10 +40,38 @@ public class MainController extends BaseController<MainBusiness, MainRepository>
 		
 	}
 	
-	
+	/**
+	 * Method to get document types
+	 * @return
+	 * @throws Exception
+	 */
 	@PostMapping(path = "/getDocumenTypes")
-	public ResponseEntity<BaseResponse> getDocumenTypes() throws Exception{
-		BaseResponse response = getBusiness().getDocumenTypes();
+	public ResponseEntity<BaseDTO> getDocumenTypes() throws Exception{
+		BaseDTO response = getBusiness().getDocumenTypes();
+		return new ResponseEntity<>(response,HttpStatus.OK);
+		
+	}
+	
+	/**
+	 * Method to get brands
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping(path = "/getBrands")
+	public ResponseEntity<BaseDTO> getBrands() throws Exception{
+		BaseDTO response = getBusiness().getBrands();
+		return new ResponseEntity<>(response,HttpStatus.OK);
+		
+	}
+	
+	/**
+	 * Method to get technologies
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping(path = "/getTechnologies")
+	public ResponseEntity<BaseDTO> getTechnologies() throws Exception{
+		BaseDTO response = getBusiness().getTechnologies();
 		return new ResponseEntity<>(response,HttpStatus.OK);
 		
 	}

@@ -5,9 +5,9 @@ import java.sql.Connection;
 import org.springframework.stereotype.Service;
 
 import co.com.gamestore.framework.business.BaseBusiness;
+import co.com.gamestore.framework.dto.BaseDTO;
 import co.com.gamestore.framework.error.CustomErrorException;
 import co.com.gamestore.framework.repository.BaseRepository;
-import co.com.gamestore.framework.response.BaseResponse;
 import co.com.gamestore.framework.util.Utils;
 import co.com.gamestore.pos.services.clients.model.ClientDTO;
 import co.com.gamestore.pos.services.clients.repository.ClientRepository;
@@ -49,13 +49,13 @@ public class ClientBusiness extends BaseBusiness<ClientRepository> {
 		return response;
 	}
 
-	public BaseResponse updateClient(ClientDTO request) throws ReflectiveOperationException {
-		BaseResponse response = new BaseResponse();
+	public BaseDTO updateClient(ClientDTO request) throws ReflectiveOperationException {
+		BaseDTO response = new BaseDTO();
 		try {
 			getRepository().updateClient(request);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return handleError(e, BaseResponse.class);
+			return handleError(e, BaseDTO.class);
 		}
 		response.setSuccess(true);
 		return response;

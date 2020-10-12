@@ -3,8 +3,8 @@ package co.com.gamestore.pos.services.main.business;
 import java.util.Map;
 
 import co.com.gamestore.framework.business.BaseBusiness;
+import co.com.gamestore.framework.dto.BaseDTO;
 import co.com.gamestore.framework.error.CustomErrorException;
-import co.com.gamestore.framework.response.BaseResponse;
 import co.com.gamestore.framework.security.encrypt.aesb64.EncrypAESB64;
 import co.com.gamestore.pos.services.main.model.UserDTO;
 import co.com.gamestore.pos.services.main.repository.MainRepository;
@@ -35,14 +35,52 @@ public class MainBusiness extends BaseBusiness<MainRepository> {
 		user.setSuccess(true);
 		return user;
 	}
-
-	public BaseResponse getDocumenTypes() throws ReflectiveOperationException {
-		BaseResponse response;
+	/**
+	 * Method to get document Types
+	 * @return
+	 * @throws ReflectiveOperationException
+	 */
+	public BaseDTO getDocumenTypes() throws ReflectiveOperationException {
+		BaseDTO response;
 		try {
 			response = getRepository().getDocumenTypes();
 		}catch (Exception e) {
 			e.printStackTrace();
-			return handleError(e,BaseResponse.class);
+			return handleError(e,BaseDTO.class);
+		}
+		response.setSuccess(true);
+		return response;
+	}
+	
+	/**
+	 * Method to get brands
+	 * @return
+	 * @throws ReflectiveOperationException
+	 */
+	public BaseDTO getBrands() throws ReflectiveOperationException {
+		BaseDTO response;
+		try {
+			response = getRepository().getBrands();
+		}catch (Exception e) {
+			e.printStackTrace();
+			return handleError(e,BaseDTO.class);
+		}
+		response.setSuccess(true);
+		return response;
+	}
+	
+	/**
+	 * Method to get technologies
+	 * @return
+	 * @throws ReflectiveOperationException
+	 */
+	public BaseDTO getTechnologies() throws ReflectiveOperationException {
+		BaseDTO response;
+		try {
+			response = getRepository().getTechnologies();
+		}catch (Exception e) {
+			e.printStackTrace();
+			return handleError(e,BaseDTO.class);
 		}
 		response.setSuccess(true);
 		return response;

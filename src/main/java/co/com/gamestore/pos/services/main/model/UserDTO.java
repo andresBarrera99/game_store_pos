@@ -1,13 +1,13 @@
 package co.com.gamestore.pos.services.main.model;
 
-import co.com.gamestore.framework.response.BaseResponse;
+import co.com.gamestore.framework.dto.BaseDTO;
 
 /**
  * 
  * @author Jonathan.Barrera
  *	DTO to save user information and pass the data through classes
  */
-public class UserDTO extends BaseResponse {
+public class UserDTO extends BaseDTO {
 	
 	/**
 	 * 

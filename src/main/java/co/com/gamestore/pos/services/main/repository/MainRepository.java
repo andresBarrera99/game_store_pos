@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import co.com.gamestore.framework.dto.BaseDTO;
 import co.com.gamestore.framework.repository.BaseRepository;
-import co.com.gamestore.framework.response.BaseResponse;
+import co.com.gamestore.pos.services.main.model.BrandDTO;
 import co.com.gamestore.pos.services.main.model.DocumentTypeDTO;
+import co.com.gamestore.pos.services.main.model.TechnologyDTO;
 import co.com.gamestore.pos.services.main.model.UserDTO;
 
 public class MainRepository extends BaseRepository {
@@ -76,8 +78,8 @@ public class MainRepository extends BaseRepository {
 		return true;
 	}
 
-	public BaseResponse getDocumenTypes() throws Exception {
-		BaseResponse response = new BaseResponse();
+	public BaseDTO getDocumenTypes() throws Exception {
+		BaseDTO response = new BaseDTO();
 		List<DocumentTypeDTO> list = new ArrayList<>();
 		Connection c = connect(true);
 		ResultSet rs = null;
@@ -87,6 +89,60 @@ public class MainRepository extends BaseRepository {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				list.add(new DocumentTypeDTO(rs.getInt("doc_type_id"),rs.getString("doc_description"),rs.getString("doc_initials")));
+			}
+		} catch (IOException | SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			closeAll(rs, ps, c);
+		}
+		response.setList(list);
+		return response;
+	}
+	
+	/**
+	 * Method to get brands
+	 * @return
+	 * @throws Exception
+	 */
+	public BaseDTO getBrands() throws Exception {
+		BaseDTO response = new BaseDTO();
+		List<BrandDTO> list = new ArrayList<>();
+		Connection c = connect(true);
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		try {
+			ps = c.prepareStatement(getQuery("QUERY_GET_BRANDS.sql"));
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				list.add(new BrandDTO(rs.getInt("brand_id"),rs.getString("brand_name")));
+			}
+		} catch (IOException | SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			closeAll(rs, ps, c);
+		}
+		response.setList(list);
+		return response;
+	}
+	
+	/**
+	 * Method to get technologies
+	 * @return
+	 * @throws Exception
+	 */
+	public BaseDTO getTechnologies() throws Exception {
+		BaseDTO response = new BaseDTO();
+		List<TechnologyDTO> list = new ArrayList<>();
+		Connection c = connect(true);
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		try {
+			ps = c.prepareStatement(getQuery("QUERY_GET_TECHNOLOGIES.sql"));
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				list.add(new TechnologyDTO(rs.getInt("tech_id"),rs.getString("tech_name")));
 			}
 		} catch (IOException | SQLException e) {
 			e.printStackTrace();

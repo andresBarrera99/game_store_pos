@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.gamestore.framework.controller.BaseController;
+import co.com.gamestore.framework.dto.BaseDTO;
 import co.com.gamestore.framework.error.CustomErrorException;
-import co.com.gamestore.framework.response.BaseResponse;
 import co.com.gamestore.pos.services.clients.business.ClientBusiness;
 import co.com.gamestore.pos.services.clients.model.ClientDTO;
 import co.com.gamestore.pos.services.clients.repository.ClientRepository;
@@ -41,8 +41,8 @@ public class ClientController extends BaseController<ClientBusiness,ClientReposi
 	}
 	
 	@PostMapping(path = "/update")
-	public ResponseEntity<BaseResponse> updateClient(@RequestBody ClientDTO request) throws Exception{
-		BaseResponse response = getBusiness().updateClient(request);
+	public ResponseEntity<BaseDTO> updateClient(@RequestBody ClientDTO request) throws Exception{
+		BaseDTO response = getBusiness().updateClient(request);
 		return new ResponseEntity<>(response,HttpStatus.OK);
 		
 	}

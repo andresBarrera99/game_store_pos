@@ -1,6 +1,7 @@
 package co.com.gamestore.pos.services.clients.model;
 
-import co.com.gamestore.framework.response.BaseResponse;
+import co.com.gamestore.framework.dto.BaseDTO;
+import co.com.gamestore.pos.services.main.model.DocumentTypeDTO;
 
 /**
  * 
@@ -8,7 +9,7 @@ import co.com.gamestore.framework.response.BaseResponse;
  * 
  *         DTO to save client information and pass the data through classes
  */
-public class ClientDTO extends BaseResponse {
+public class ClientDTO extends BaseDTO {
 
 	/**
 	 * 
@@ -18,7 +19,7 @@ public class ClientDTO extends BaseResponse {
 	private String name;
 	private String lastName1;
 	private String lastName2;
-	private Integer docType;
+	private DocumentTypeDTO docType;
 	private String docNumber;
 	private String address;
 	private Integer age;
@@ -34,37 +35,6 @@ public class ClientDTO extends BaseResponse {
 		super();
 	}
 	
-	
-
-	/**
-	 * Basic constructor with all attributes
-	 * @param clientID
-	 * @param name
-	 * @param lastName1
-	 * @param lastName2
-	 * @param docType
-	 * @param docNumber
-	 * @param address
-	 * @param birthDate
-	 * @param phone
-	 * @param cellphone
-	 */
-	public ClientDTO(Long clientID, String name, String lastName1, String lastName2, Integer docType, String docNumber,
-			String address, Integer age, Long phone, Long cellphone) {
-		super();
-		this.clientID = clientID;
-		this.name = name;
-		this.lastName1 = lastName1;
-		this.lastName2 = lastName2;
-		this.docType = docType;
-		this.docNumber = docNumber;
-		this.address = address;
-		this.age = age;
-		this.phone = phone;
-		this.cellPhone = cellphone;
-	}
-
-
 
 	/**
 	 * @return the clientID
@@ -125,14 +95,14 @@ public class ClientDTO extends BaseResponse {
 	/**
 	 * @return the docType
 	 */
-	public Integer getDocType() {
+	public DocumentTypeDTO getDocType() {
 		return docType;
 	}
 
 	/**
 	 * @param docType the docType to set
 	 */
-	public void setDocType(Integer docType) {
+	public void setDocType(DocumentTypeDTO docType) {
 		this.docType = docType;
 	}
 

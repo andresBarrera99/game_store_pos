@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 
 import co.com.gamestore.framework.error.CustomErrorException;
 import co.com.gamestore.framework.repository.BaseRepository;
@@ -33,7 +32,7 @@ public class ClientRepository extends BaseRepository {
 			pstmt.setString(1, request.getName());
 			pstmt.setString(2, request.getLastName1());
 			pstmt.setString(3, request.getLastName2());
-			pstmt.setInt(4, request.getDocType());
+			pstmt.setInt(4, request.getDocType().getID());
 			pstmt.setString(5, request.getDocNumber());
 			pstmt.setString(6, request.getAddress());
 			pstmt.setInt(7, request.getAge());
@@ -62,7 +61,7 @@ public class ClientRepository extends BaseRepository {
 		ResultSet rs = null;
 		try {
 			pstmt = c.prepareStatement(getQuery("QUERY_VALIDATE_CLIENT_REGISTER.sql"));
-			pstmt.setInt(1, request.getDocType());
+			pstmt.setInt(1, request.getDocType().getID());
 			pstmt.setString(2, request.getDocNumber());
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -88,7 +87,7 @@ public class ClientRepository extends BaseRepository {
 		ResultSet rs = null;
 		try {
 			pstmt = c.prepareStatement(getQuery("QUERY_GET_CLIENT.sql"));
-			pstmt.setInt(1, request.getDocType());
+			pstmt.setInt(1, request.getDocType().getID());
 			pstmt.setString(2, request.getDocNumber());
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -114,7 +113,7 @@ public class ClientRepository extends BaseRepository {
 	}
 
 	public void updateClient(ClientDTO request) throws CustomErrorException, SQLException, IOException {
-		Connection c = connect(true);
+		Connection c = connect(false);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -126,7 +125,7 @@ public class ClientRepository extends BaseRepository {
 			pstmt.setInt(5, request.getAge());
 			pstmt.setLong(6, Utils.isNull(request.getPhone()) ? 0L : request.getPhone());
 			pstmt.setLong(7, request.getCellPhone());
-			pstmt.setInt(8, request.getDocType());
+			pstmt.setInt(8, request.getDocType().getID());
 			pstmt.setString(9, request.getDocNumber());
 			int rowCount = pstmt.executeUpdate();
 			if (rowCount < 1) {
